@@ -1,0 +1,16 @@
+[package]
+name = "benstoy_make_img"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+default = ["embed_cargo"]
+embed_cargo = ["dep:cargo"]
+
+[dependencies]
+gpt = "4.0.0"
+
+clap = { version = "4.5.30", features = ["derive"] }
+anyhow = "1.0.95"
+
+cargo = { version = "0.85.0", features = ["all-static"], optional = true }

@@ -1,0 +1,16 @@
+cargo-features = ["edition2024"] # Necessary for make_image because it uses
+                                 # a cargo version that is 1 behind.
+[package]
+name = "benstoy"
+version = "0.1.0"
+edition = "2024"
+
+[profile.release]
+panic = "abort"
+
+[profile.dev]
+panic = "abort"
+
+[dependencies]
+uefi = { version = "0.33.0", features = ["panic_handler"] }
+
