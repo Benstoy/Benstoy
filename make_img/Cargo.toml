@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [features]
-default = ["embed_cargo"]
+default = []
 embed_cargo = ["dep:cargo"]
 
 [dependencies]

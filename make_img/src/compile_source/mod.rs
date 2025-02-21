@@ -1,3 +1,5 @@
+#[cfg(not(feature = "embed_cargo"))]
+mod cargo_command;
 #[cfg(feature = "embed_cargo")]
 mod cargo_library;
 
@@ -26,7 +28,7 @@ impl From<&str> for Target {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct EfiBinary {
     pub path: PathBuf,
     pub target: Target,
@@ -53,6 +55,9 @@ pub fn compile(is_release: bool) -> Result<Vec<EfiBinary>> {
         .expect("$CARGO_MANIFEST_DIR is '/'")
         .join("core"); // $GIT_ROOT$/core
 
+    #[cfg(not(feature = "embed_cargo"))]
+    return cargo_command::compile_into(&core_path, is_release);
+
     #[cfg(feature = "embed_cargo")]
-    cargo_library::compile_into(&core_path, is_release)
+    return cargo_library::compile_into(&core_path, is_release);
 }
