@@ -12,7 +12,7 @@ use crate::BRANDING;
 const NO_FLAGS: u64 = 0;
 const ALIGNMENT_SECTORS: u64 = 2048;
 
-pub fn format_file(path: &Path) -> Result<()> {
+pub fn partition_file(path: &Path) -> Result<()> {
     // This file can be a disk device.
     let mut file = OpenOptions::new()
         .write(true)

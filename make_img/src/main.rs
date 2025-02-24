@@ -1,11 +1,11 @@
 pub mod compile_source;
-mod format_image;
+mod partition;
 
 use std::path::PathBuf;
 
 use clap::Parser;
 use compile_source::compile;
-use format_image::format_file;
+use partition::partition_file;
 
 const BRANDING: &str = "Benstoy";
 
@@ -24,5 +24,5 @@ fn main() {
     let args = Args::parse();
 
     dbg!(compile(args.release).unwrap());
-    format_file(&args.file).unwrap()
+    partition_file(&args.file).unwrap()
 }
