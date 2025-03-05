@@ -10,7 +10,6 @@ use std::path::{Path, PathBuf};
 #[derive(Clone, Debug)]
 pub struct Target {
     triple: &'static str,
-    #[expect(dead_code)]
     pub efi_boot_file: &'static str,
 }
 
@@ -30,7 +29,6 @@ impl From<&str> for Target {
 }
 
 #[derive(Debug, Clone)]
-#[expect(dead_code)]
 pub struct EfiBinary {
     pub path: PathBuf,
     pub target: Target,

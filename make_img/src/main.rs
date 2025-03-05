@@ -1,17 +1,12 @@
-mod compile_source;
-mod disk;
-mod format;
-mod partition;
-
 use std::path::PathBuf;
 
+use benstoy_make_img::{
+    compile,
+    disk::disk_from_file,
+    format::{ExFatFormatter, Fat32Formatter, format},
+    partition_file,
+};
 use clap::Parser;
-use compile_source::compile;
-use disk::from_file;
-use format::{ExFatFormatter, Fat32Formatter, format};
-use partition::partition_file;
-
-const BRANDING: &str = "Benstoy";
 
 #[derive(Parser)]
 #[command(version)]
@@ -26,7 +21,7 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    let mut disk = from_file(&args.file).unwrap();
+    let mut disk = disk_from_file(&args.file).unwrap();
 
     let _binaries = compile(args.release).unwrap();
     let partition_table = partition_file(&mut disk).unwrap();

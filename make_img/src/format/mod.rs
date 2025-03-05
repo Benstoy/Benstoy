@@ -2,6 +2,7 @@ use anyhow::Result;
 use fscommon::StreamSlice;
 
 use crate::{disk::Disk, partition::PartitionData};
+use sealed::{FSWrapperTODO, Formatter};
 
 pub use exfat::ExFatFormatter;
 pub use fat32::Fat32Formatter;
@@ -21,14 +22,21 @@ pub fn format<T: Formatter>(
     )
 }
 
-pub trait Formatter {
-    fn format(
-        partition: StreamSlice<impl Disk>,
-        block_size: u64,
-        label: String,
-    ) -> Result<FSWrapperTODO>;
-}
+mod sealed {
+    use anyhow::Result;
+    use fscommon::StreamSlice;
 
-// TODO
-/// Generic abstraction over filesystems and accessing them
-pub struct FSWrapperTODO;
+    use crate::disk::Disk;
+
+    pub trait Formatter {
+        fn format(
+            partition: StreamSlice<impl Disk>,
+            block_size: u64,
+            label: String,
+        ) -> Result<FSWrapperTODO>;
+    }
+
+    // TODO
+    /// Generic abstraction over filesystems and accessing them
+    pub struct FSWrapperTODO;
+}
