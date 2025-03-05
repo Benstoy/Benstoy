@@ -1,4 +1,4 @@
-pub mod compile_source;
+mod compile_source;
 mod disk;
 mod format;
 mod partition;
@@ -28,7 +28,7 @@ fn main() {
     let args = Args::parse();
     let mut disk = from_file(&args.file).unwrap();
 
-    dbg!(compile(args.release).unwrap());
+    let _binaries = compile(args.release).unwrap();
     let partition_table = partition_file(&mut disk).unwrap();
 
     format::<Fat32Formatter>(

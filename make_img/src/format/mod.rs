@@ -15,11 +15,7 @@ pub fn format<T: Formatter>(
     partition_data: &PartitionData,
 ) -> Result<FSWrapperTODO> {
     T::format(
-        StreamSlice::new(
-            disk,
-            dbg!(partition_data.start_byte),
-            dbg!(partition_data.end_byte),
-        )?,
+        StreamSlice::new(disk, partition_data.start_byte, partition_data.end_byte)?,
         block_size,
         partition_data.label.to_owned(),
     )

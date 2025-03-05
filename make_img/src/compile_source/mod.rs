@@ -10,6 +10,7 @@ use std::path::{Path, PathBuf};
 #[derive(Clone, Debug)]
 pub struct Target {
     triple: &'static str,
+    #[expect(dead_code)]
     pub efi_boot_file: &'static str,
 }
 
@@ -29,6 +30,7 @@ impl From<&str> for Target {
 }
 
 #[derive(Debug, Clone)]
+#[expect(dead_code)]
 pub struct EfiBinary {
     pub path: PathBuf,
     pub target: Target,
@@ -49,7 +51,7 @@ const TARGETS: [Target; 3] = [
     },
 ];
 
-pub fn compile(is_release: bool) -> Result<Vec<EfiBinary>> {
+pub fn compile(is_release: bool) -> Result<[EfiBinary; TARGETS.len()]> {
     let core_path = Path::new(env!("CARGO_MANIFEST_DIR"))
         .parent() // $GIT_ROOT$
         .expect("$CARGO_MANIFEST_DIR is '/'")

@@ -5,12 +5,8 @@ use std::process::Command;
 
 use super::EfiBinary;
 
-pub fn compile_into(core_path: &Path, is_release: bool) -> Result<Vec<EfiBinary>> {
+pub fn compile_into(core_path: &Path, is_release: bool) -> Result<[EfiBinary; TARGETS.len()]> {
     let mut args = vec!["build", "-q"];
-    for x in TARGETS {
-        args.push("--target");
-        args.push(x.triple);
-    }
 
     if is_release {
         args.push("--release");
@@ -40,5 +36,5 @@ pub fn compile_into(core_path: &Path, is_release: bool) -> Result<Vec<EfiBinary>
         EfiBinary { target, path }
     });
 
-    Ok(binaries.to_vec())
+    Ok(binaries)
 }
