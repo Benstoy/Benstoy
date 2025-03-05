@@ -27,7 +27,8 @@ impl Formatter for ExFatFormatter {
                 size,
                 Label::new(label).ok_or(anyhow!("Failed creating EFI Label"))?,
             ),
-        )?;
+        )?
+        .write(&mut partition)?;
 
         Ok(FSWrapperTODO)
     }
