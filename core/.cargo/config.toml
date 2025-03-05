@@ -1,2 +1,5 @@
 [unstable]
 build-std = ["core", "test", "panic_abort"]
+
+[build]
+target = ["x86_64-unknown-uefi", "aarch64-unknown-uefi", "i686-unknown-uefi"]
